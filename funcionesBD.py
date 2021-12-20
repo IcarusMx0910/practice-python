@@ -8,7 +8,7 @@ from tkinter.constants import END
 
 def conexionBD():
     
-    conection = sqlite3.connect("Usuarios")
+    conection = sqlite3.connect("Usuarios.db")
     cursor = conection.cursor()
 
     try:
@@ -36,7 +36,7 @@ def salirAplicacion():
 #/------------------------ Funciones CRUD --------------------------/
 
 def crear(datos):
-    conection = sqlite3.connect("Usuarios")
+    conection = sqlite3.connect("Usuarios.db")
     cursor = conection.cursor()
     try:
         cursor.execute("INSERT INTO DATOSUSUARIOS VALUES (NULL,?,?,?,?,?)", (datos))
@@ -47,7 +47,7 @@ def crear(datos):
     conection.commit()
 
 def leer(uid):
-    conection = sqlite3.connect("Usuarios")
+    conection = sqlite3.connect("Usuarios.db")
     cursor = conection.cursor()
     try:
         cursor.execute('''
@@ -62,7 +62,7 @@ def leer(uid):
     return elUsuario
 
 def actualizar(uid, datos):
-    conection = sqlite3.connect("Usuarios")
+    conection = sqlite3.connect("Usuarios.db")
     cursor = conection.cursor()
     try:
         cursor.execute('''
@@ -76,7 +76,7 @@ def actualizar(uid, datos):
     conection.commit()
 
 def eliminar(uid):
-    conection = sqlite3.connect("Usuarios")
+    conection = sqlite3.connect("Usuarios.db")
     cursor = conection.cursor()
     try:
         cursor.execute('''
