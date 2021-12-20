@@ -20,6 +20,7 @@ def limpiarCampos():
 def insertar():
     nuevoUsuario = thisName.get(), thisPass.get(), thisLname.get(), thisAdress.get(), campoComent.get(1.0, END)
     crear(nuevoUsuario)
+    limpiarCampos()
 
 def consultar():
     for usuario in leer(thisId.get()):
@@ -33,15 +34,11 @@ def consultar():
 def update():
     datosnuevos = thisName.get(), thisPass.get(), thisLname.get(), thisAdress.get(), campoComent.get(1.0, END)
     actualizar(thisId.get(), datosnuevos)
+    limpiarCampos()
 
 def borrar():
     eliminar(thisId.get())
-    thisId.set("")
-    thisName.set("")
-    thisPass.set("")
-    thisLname.set("")
-    thisAdress.set("")
-    campoComent.delete(1.0, END)
+    limpiarCampos()
 
 #/---------------------- Creación de la ventana principal ----------------------/
 root = Tk()
