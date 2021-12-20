@@ -7,9 +7,35 @@ pero sin cerrar la aplicación y permita continuar el flujo de operación con no
 from tkinter import *
 from funcionesBD import *
 
-#/------------------------ Función interna Limpiar -----------------------------/ 2112130000100784
+#/--------------------- Funciones internas auxiliares CRUD ------------------------/
 
 def limpiarCampos():
+    thisId.set("")
+    thisName.set("")
+    thisPass.set("")
+    thisLname.set("")
+    thisAdress.set("")
+    campoComent.delete(1.0, END)
+
+def insertar():
+    nuevoUsuario = thisName.get(), thisPass.get(), thisLname.get(), thisAdress.get(), campoComent.get(1.0, END)
+    crear(nuevoUsuario)
+
+def consultar():
+    for usuario in leer(thisId.get()):
+        thisId.set(usuario[0])
+        thisName.set(usuario[1])
+        thisPass.set(usuario[2])
+        thisLname.set(usuario[3])
+        thisAdress.set(usuario[4])
+        campoComent.insert(1.0, usuario[5])
+
+def update():
+    datosnuevos = thisName.get(), thisPass.get(), thisLname.get(), thisAdress.get(), campoComent.get(1.0, END)
+    actualizar(thisId.get(), datosnuevos)
+
+def borrar():
+    eliminar(thisId.get())
     thisId.set("")
     thisName.set("")
     thisPass.set("")
@@ -34,10 +60,10 @@ menuDelete.add_command(label= "Borrar Campos", command= limpiarCampos)
 
 
 menuCRUD = Menu(barraMenu, tearoff= 0)
-menuCRUD.add_command(label="Crear")
-menuCRUD.add_command(label="Leer")
-menuCRUD.add_command(label="Actualizar")
-menuCRUD.add_command(label="Borrar")
+menuCRUD.add_command(label="Crear", command = insertar)
+menuCRUD.add_command(label="Leer", command = consultar)
+menuCRUD.add_command(label="Actualizar", command = update)
+menuCRUD.add_command(label="Borrar", command= borrar)
 
 menuHelp = Menu(barraMenu, tearoff= 0)
 menuHelp.add_command(label= "Licencia")
@@ -104,16 +130,16 @@ campoComent.config(yscrollcommand=scrollVert.set)
 frameInf = Frame(root)
 frameInf.pack()
 
-btnCreate = Button(frameInf, text= "Nuevo")
+btnCreate = Button(frameInf, text= "Nuevo", command = insertar)
 btnCreate.grid(row= 0, column= 0, padx= 10, pady= 10)
 
-btnRead = Button(frameInf, text= "Buscar")
+btnRead = Button(frameInf, text= "Buscar", command = consultar)
 btnRead.grid(row= 0, column= 1, padx= 10, pady= 10)
 
-btnUpdate = Button(frameInf, text= "Actualizar")
+btnUpdate = Button(frameInf, text= "Actualizar", command = update)
 btnUpdate.grid(row= 0, column= 2, padx= 10, pady= 10)
 
-btnDelete = Button(frameInf, text= "Borrar")
+btnDelete = Button(frameInf, text= "Borrar", command = borrar)
 btnDelete.grid(row= 0, column= 3, padx= 10, pady= 10)
 
 root.mainloop()

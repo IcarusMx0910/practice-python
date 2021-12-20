@@ -1,3 +1,4 @@
+from os import error
 from tkinter import messagebox
 import sqlite3
 from tkinter.constants import END
@@ -38,10 +39,10 @@ def crear(datos):
     conection = sqlite3.connect("Usuarios")
     cursor = conection.cursor()
     try:
-        cursor.execute('''
-            INSERT INTO DATOSUSUARIOS VALUES (NULL,?,?,?,?,?)''', datos)
+        cursor.execute("INSERT INTO DATOSUSUARIOS VALUES (NULL,?,?,?,?,?)", (datos))
+        messagebox.showinfo("BD Info", "Registro creado con éxito.")
     except:
-        messagebox.showerror("Error¡¡¡","Error al guardar usuario")
+        messagebox.showerror("BD Error","Error al guardar usuario")
 
     conection.commit()
 
@@ -53,7 +54,7 @@ def leer(uid):
             SELECT * FROM DATOSUSUARIOS WHERE ID = ?
         ''', uid)
     except:
-        messagebox.showerror("Error¡¡¡","Error al consultar el usuario")
+        messagebox.showerror("BD Error","Error al consultar el usuario")
 
     elUsuario = cursor.fetchall()
     conection.commit()
@@ -68,8 +69,9 @@ def actualizar(uid, datos):
             UPDATE DATOSUSUARIOS SET NOMBRE_USUARIO = ?, PASSWORD = ?, APELLIDO = ?,
             DIRECCION = ?, COMENTARIOS = ?  WHERE ID = ''' + uid, 
             (datos) )
+        messagebox.showinfo("BD Info", "Registro actualizado con éxito.")
     except:
-        messagebox.showerror("Error¡¡¡","Error al actualizar usuario")
+        messagebox.showerror("BD Error","Error al actualizar usuario")
     
     conection.commit()
 
@@ -80,7 +82,8 @@ def eliminar(uid):
         cursor.execute('''
             DELETE FROM DATOSUSUARIOS WHERE ID = ?
         ''', uid)
+        messagebox.showinfo("BD Info", "Registro eliminado con éxito.")
     except:
-        messagebox.showerror("Error¡¡¡","Error al eliminar usuario")
+        messagebox.showerror("BD Error","Error al eliminar usuario")
     
     conection.commit()
