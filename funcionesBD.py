@@ -1,4 +1,3 @@
-from os import error
 from tkinter import messagebox
 import sqlite3
 from tkinter.constants import END

@@ -1,9 +1,3 @@
-'''Crear una interfaz gráfica de tipo CRUD usando los temas vistos en toda la sección de interfacez gráficas
-y bases de datos. Debe de contar con un menú de opciones, permitir vacias o borrar los campos, ventanas
-emergentes con su respectivo tipo de mensaje, cuadros de texto, labels, 4 botones que hagan la función CREATE
-READ, UPDATE, DELETE respectivamente y que, si la base de datos ya existe, que arroje un mensaje de error
-pero sin cerrar la aplicación y permita continuar el flujo de operación con normalidad.'''
-
 from tkinter import *
 from funcionesBD import *
 
